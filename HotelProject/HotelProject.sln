@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenticationService", "AuthenticationService\AuthenticationService.csproj", "{1B5A48B4-CDB7-4DD9-9119-0773C551F03B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KundenfeedbackService", "KundenfeedbackService\KundenfeedbackService.csproj", "{8960FAC2-89AD-454C-8CEE-97ECFDB0ED5F}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingService", "BookingService\BookingService.csproj", "{05DD22D0-F85C-48DC-9E63-C3E92C162046}"
 EndProject
 Global
@@ -14,6 +16,10 @@ Global
 		{1B5A48B4-CDB7-4DD9-9119-0773C551F03B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B5A48B4-CDB7-4DD9-9119-0773C551F03B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B5A48B4-CDB7-4DD9-9119-0773C551F03B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8960FAC2-89AD-454C-8CEE-97ECFDB0ED5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8960FAC2-89AD-454C-8CEE-97ECFDB0ED5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8960FAC2-89AD-454C-8CEE-97ECFDB0ED5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8960FAC2-89AD-454C-8CEE-97ECFDB0ED5F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{05DD22D0-F85C-48DC-9E63-C3E92C162046}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{05DD22D0-F85C-48DC-9E63-C3E92C162046}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05DD22D0-F85C-48DC-9E63-C3E92C162046}.Release|Any CPU.ActiveCfg = Release|Any CPU
