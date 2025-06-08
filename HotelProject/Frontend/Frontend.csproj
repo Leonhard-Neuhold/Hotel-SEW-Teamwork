@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Duende.IdentityModel.OidcClient" Version="6.0.1" />
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.5" />
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="9.0.5" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Components\Pages\Account\LoginPage.razor" />
+      <_ContentIncludedByDefault Remove="Pages\Account\AccessDenied.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Account\Login\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Account\Logout\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Account\Logout\LoggedOut.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Ciba\All.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Ciba\Consent.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Ciba\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Ciba\_ScopeListItem.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Consent\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Consent\_ScopeListItem.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Device\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Device\Success.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Device\_ScopeListItem.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Diagnostics\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\ExternalLogin\Callback.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\ExternalLogin\Challenge.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Grants\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Home\Error\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Redirect\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\ServerSideSessions\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\_Layout.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\_Nav.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\_ValidationSummary.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_ViewImports.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_ViewStart.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Duende.IdentityServer">
+        <HintPath>..\..\..\..\.nuget\packages\duende.identityserver\7.0.4\lib\net8.0\Duende.IdentityServer.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+</Project>
