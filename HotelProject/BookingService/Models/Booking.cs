@@ -8,7 +8,7 @@ public class Booking
     public int BookingId { get; set; }
 
     [Required]
-    public int GuestId { get; set; }
+    public string? GuestId { get; set; }
 
     [Required]
     public int RoomId { get; set; }

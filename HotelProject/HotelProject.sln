@@ -1,20 +1,32 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.8.0.0
-MinimumVisualStudioVersion = 17.8.0.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelProject.AppHost", "HotelProject.AppHost\HotelProject.AppHost.csproj", "{E80F5E63-F2F7-4C87-AA4C-BF271E079552}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayService", "PayService\PayService.csproj", "{9F30ACAB-9BF9-47DE-8DEA-C24DD88BF3E0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelProject.ServiceDefaults", "HotelProject.ServiceDefaults\HotelProject.ServiceDefaults.csproj", "{250D3788-43A2-4642-BACB-AB91E2929044}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenticationApiService", "AuthenticationApiService\AuthenticationApiService.csproj", "{D5A431C6-8A18-4702-9D89-33CA931950F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenticationApiService", "AuthenticationApiService\AuthenticationApiService.csproj", "{B9BB9305-2D04-437F-B2F4-DEC2D05B3749}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenticationDuendeService", "AuthenticationDuendeService\AuthenticationDuendeService.csproj", "{E156BC11-5596-45E4-9687-4B170A5002B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenticationDuendeService", "AuthenticationDuendeService\AuthenticationDuendeService.csproj", "{47F0F211-D6DD-4E9E-BE6F-18222B92A427}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingService", "BookingService\BookingService.csproj", "{AD7709E1-AAE9-4F6E-B0F9-DFF7AAC98086}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frontend", "Frontend\Frontend.csproj", "{9D7ADEF5-AB99-41AB-B1B7-5DD761A9EC35}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frontend", "Frontend\Frontend.csproj", "{F1FEB505-5E10-476D-9FF0-2ADD9AF13E7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KundenfeedbackService", "KundenfeedbackService\KundenfeedbackService.csproj", "{8960FAC2-89AD-454C-8CEE-97ECFDB0ED5F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelProject.AppHost", "HotelProject.AppHost\HotelProject.AppHost.csproj", "{22FB6FEA-4167-492C-B20F-E51938A4284A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingService", "BookingService\BookingService.csproj", "{05DD22D0-F85C-48DC-9E63-C3E92C162046}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelProject.ServiceDefaults", "HotelProject.ServiceDefaults\HotelProject.ServiceDefaults.csproj", "{5A9DB394-A771-459B-9C11-B3629EE1ACC2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosting", "Hosting", "{D18D94DB-8F97-40BF-A2F9-91738F3E7437}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentication", "{9725505B-00D1-4B8E-AF8C-839924D922D6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{E2349A20-0BDA-4F4B-9429-0909E9D5FF19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KundenfeedbackService", "KundenfeedbackService\KundenfeedbackService.csproj", "{83C15B4D-4BFD-4A33-9612-E927239B7D98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResaurantService", "ResaurantService\ResaurantService.csproj", "{00EBAB50-984A-4346-A69E-BDA3DDB8A0E3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{7493AEED-C391-45B6-BD4D-49610E1D4294}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomService", "RoomService\RoomService.csproj", "{CCBE22DC-43E9-46EB-9C88-2E9BF0870284}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,6 +34,57 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-
+		{9F30ACAB-9BF9-47DE-8DEA-C24DD88BF3E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F30ACAB-9BF9-47DE-8DEA-C24DD88BF3E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F30ACAB-9BF9-47DE-8DEA-C24DD88BF3E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F30ACAB-9BF9-47DE-8DEA-C24DD88BF3E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5A431C6-8A18-4702-9D89-33CA931950F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5A431C6-8A18-4702-9D89-33CA931950F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5A431C6-8A18-4702-9D89-33CA931950F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5A431C6-8A18-4702-9D89-33CA931950F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E156BC11-5596-45E4-9687-4B170A5002B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E156BC11-5596-45E4-9687-4B170A5002B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E156BC11-5596-45E4-9687-4B170A5002B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E156BC11-5596-45E4-9687-4B170A5002B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD7709E1-AAE9-4F6E-B0F9-DFF7AAC98086}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD7709E1-AAE9-4F6E-B0F9-DFF7AAC98086}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD7709E1-AAE9-4F6E-B0F9-DFF7AAC98086}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD7709E1-AAE9-4F6E-B0F9-DFF7AAC98086}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1FEB505-5E10-476D-9FF0-2ADD9AF13E7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1FEB505-5E10-476D-9FF0-2ADD9AF13E7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1FEB505-5E10-476D-9FF0-2ADD9AF13E7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1FEB505-5E10-476D-9FF0-2ADD9AF13E7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22FB6FEA-4167-492C-B20F-E51938A4284A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22FB6FEA-4167-492C-B20F-E51938A4284A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22FB6FEA-4167-492C-B20F-E51938A4284A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22FB6FEA-4167-492C-B20F-E51938A4284A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A9DB394-A771-459B-9C11-B3629EE1ACC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A9DB394-A771-459B-9C11-B3629EE1ACC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A9DB394-A771-459B-9C11-B3629EE1ACC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A9DB394-A771-459B-9C11-B3629EE1ACC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83C15B4D-4BFD-4A33-9612-E927239B7D98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83C15B4D-4BFD-4A33-9612-E927239B7D98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83C15B4D-4BFD-4A33-9612-E927239B7D98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83C15B4D-4BFD-4A33-9612-E927239B7D98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00EBAB50-984A-4346-A69E-BDA3DDB8A0E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00EBAB50-984A-4346-A69E-BDA3DDB8A0E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00EBAB50-984A-4346-A69E-BDA3DDB8A0E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00EBAB50-984A-4346-A69E-BDA3DDB8A0E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCBE22DC-43E9-46EB-9C88-2E9BF0870284}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCBE22DC-43E9-46EB-9C88-2E9BF0870284}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCBE22DC-43E9-46EB-9C88-2E9BF0870284}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCBE22DC-43E9-46EB-9C88-2E9BF0870284}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{22FB6FEA-4167-492C-B20F-E51938A4284A} = {D18D94DB-8F97-40BF-A2F9-91738F3E7437}
+		{5A9DB394-A771-459B-9C11-B3629EE1ACC2} = {D18D94DB-8F97-40BF-A2F9-91738F3E7437}
+		{E156BC11-5596-45E4-9687-4B170A5002B7} = {9725505B-00D1-4B8E-AF8C-839924D922D6}
+		{AD7709E1-AAE9-4F6E-B0F9-DFF7AAC98086} = {E2349A20-0BDA-4F4B-9429-0909E9D5FF19}
+		{9F30ACAB-9BF9-47DE-8DEA-C24DD88BF3E0} = {E2349A20-0BDA-4F4B-9429-0909E9D5FF19}
+		{D5A431C6-8A18-4702-9D89-33CA931950F4} = {E2349A20-0BDA-4F4B-9429-0909E9D5FF19}
+		{00EBAB50-984A-4346-A69E-BDA3DDB8A0E3} = {E2349A20-0BDA-4F4B-9429-0909E9D5FF19}
+		{83C15B4D-4BFD-4A33-9612-E927239B7D98} = {E2349A20-0BDA-4F4B-9429-0909E9D5FF19}
+		{F1FEB505-5E10-476D-9FF0-2ADD9AF13E7C} = {7493AEED-C391-45B6-BD4D-49610E1D4294}
+		{CCBE22DC-43E9-46EB-9C88-2E9BF0870284} = {E2349A20-0BDA-4F4B-9429-0909E9D5FF19}
 	EndGlobalSection
 EndGlobal

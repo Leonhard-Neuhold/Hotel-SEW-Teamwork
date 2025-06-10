@@ -1,0 +1,53 @@
+@layout MainLayout
+
+@inherits LayoutComponentBase
+
+@inject NavigationManager NavigationManager
+
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        <MudText Typo="Typo.h5" Class="ml-3">Application</MudText>
+        <MudSpacer />
+        <div class="d-flex">
+            <MudIconButton Href="account" Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Inherit"/>
+            <div>@HttpContext?.User.Identity?.Name</div>
+            <MudIconButton OnClick="Logout" Icon="@Icons.Material.Filled.Logout" Color="Color.Inherit"/>
+        </div>
+    </MudAppBar>
+    <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+        <MudNavMenu>
+            <MudNavLink Icon="@Icons.Material.Filled.Home" Href="/" 
+                        Match="NavLinkMatch.All">Dashboard</MudNavLink>
+            <MudNavLink Icon="@Icons.Material.Filled.Room" Href="room" 
+                        Match="NavLinkMatch.Prefix">Rooms</MudNavLink>
+            <MudNavLink Icon="@Icons.Material.Filled.Restaurant" Href="restaurant" 
+                        Match="NavLinkMatch.Prefix">Restaurant</MudNavLink>
+            <MudNavLink Icon="@Icons.Material.Filled.Cloud" Href="weather" 
+                        Match="NavLinkMatch.Prefix">Weather</MudNavLink>
+        </MudNavMenu>
+    </MudDrawer>
+    <MudMainContent Class="m-5">
+        <MudContainer MaxWidth="MaxWidth.Medium">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
+
+@code {
+    bool _drawerOpen = true;
+    [CascadingParameter]
+    public HttpContext? HttpContext { get; set; }
+
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+
+    private Task Logout()
+    {
+        NavigationManager.NavigateTo("/authentication/logout", forceLoad: true);
+        return Task.CompletedTask;
+    }
+
+}

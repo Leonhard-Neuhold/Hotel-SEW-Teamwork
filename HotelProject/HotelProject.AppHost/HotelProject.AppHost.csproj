@@ -17,7 +17,12 @@
   <ItemGroup>
     <ProjectReference Include="..\AuthenticationApiService\AuthenticationApiService.csproj" />
     <ProjectReference Include="..\AuthenticationDuendeService\AuthenticationDuendeService.csproj" />
+    <ProjectReference Include="..\BookingService\BookingService.csproj" />
     <ProjectReference Include="..\Frontend\Frontend.csproj" />
+    <ProjectReference Include="..\KundenfeedbackService\KundenfeedbackService.csproj" />
+    <ProjectReference Include="..\PayService\PayService.csproj" />
+    <ProjectReference Include="..\ResaurantService\ResaurantService.csproj" />
+    <ProjectReference Include="..\RoomService\RoomService.csproj" />
   </ItemGroup>
 
 </Project>

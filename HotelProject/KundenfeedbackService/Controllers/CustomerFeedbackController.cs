@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using KundenFeedbackService.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KundenFeedbackService.Controllers
 {
@@ -8,16 +9,18 @@ namespace KundenFeedbackService.Controllers
     public class CustomerServiceController(CustomerFeedbackService feedbackService) : ControllerBase
     {
         [HttpPost("SubmitComplaint")]
-        public async Task<IActionResult> SubmitComplaint(int guestId, [FromBody] string complaint)
+        [Authorize]
+        public async Task<IActionResult> SubmitComplaint([FromBody] FeedbackDto feedback)
         {
-            if (string.IsNullOrWhiteSpace(complaint))
+            if (string.IsNullOrWhiteSpace(feedback.complaint))
                 return BadRequest("Complaint cannot be empty.");
 
-            var result = await feedbackService.SubmitComplaintAsync(guestId, complaint);
+            var result = await feedbackService.SubmitComplaintAsync(feedback.guestId, feedback.complaint);
             return Ok(result);
         }
 
         [HttpGet("AllFeedbacks")]
+        [Authorize]
         public async Task<IActionResult> GetAllFeedbacks()
         {
             var feedbacks = await feedbackService.GetAllFeedbacksAsync();
@@ -25,3 +28,5 @@ namespace KundenFeedbackService.Controllers
         }
     }
 }
+
+public record FeedbackDto(string guestId, string complaint);

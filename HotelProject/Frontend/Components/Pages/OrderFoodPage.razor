@@ -1,0 +1,85 @@
+@page "/restaurant"
+@using System.Net.Http.Headers
+@using Duende.IdentityServer.Extensions
+@using Microsoft.AspNetCore.Authentication
+
+@layout AppLayout
+
+@inject IHttpClientFactory HttpClientFactory
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IHttpContextAccessor HttpContextAccessor
+
+@attribute [Authorize]
+
+<PageTitle>Order Food</PageTitle>
+
+<MudPaper Class="p-5 mx-auto mt-12 max-w-md">
+    <MudText Typo="Typo.h5" Class="mb-4">Room Service Order</MudText>
+    <MudTextField @bind-Value="_meal" Label="Meal" Variant="Variant.Outlined" Margin="Margin.Dense" />
+
+    <MudButton Color="Color.Primary" OnClick="SubmitOrder" Class="mt-4" Variant="Variant.Filled">
+        Submit Order
+    </MudButton>
+
+    <MudSnackbarProvider />
+    <MudText Class="mt-2" Color="@_messageColor">@_message</MudText>
+</MudPaper>
+
+@code {
+    private string? _meal;
+    private string _message = string.Empty;
+    private Color _messageColor = Color.Default;
+    public HttpClient? Http { get; set; }
+    
+    [CascadingParameter] 
+    public HttpContext? HttpContext { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var accessToken = await HttpContextAccessor.HttpContext!.GetTokenAsync("access_token");
+        Http = HttpClientFactory.CreateClient("RestaurantClient");
+        Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+    }
+
+    private async Task SubmitOrder()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        var guestId = user.GetDisplayName();
+        
+        if (string.IsNullOrWhiteSpace(_meal))
+        {
+            _message = "Please enter a valid guest ID and meal.";
+            _messageColor = Color.Error;
+            return;
+        }
+
+        try
+        {
+            if (guestId != null)
+            {
+                var order = new OrderDto(guestId, _meal);
+            
+                var response = await Http!.PostAsJsonAsync("/order", order);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    _message = $"Order submitted for Guest {guestId}.";
+                    _messageColor = Color.Success;
+                }
+                else
+                {
+                    _message = "Failed to place the order.";
+                    _messageColor = Color.Error;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _message = $"Error: {ex}";
+            _messageColor = Color.Error;
+        }
+    }
+    
+    public record OrderDto(string guest, string meal);
+}
