@@ -14,6 +14,27 @@ builder.Services.AddSwaggerGen();          // Registers Swagger generator servic
 builder.Services.AddDbContext<BookingContext>(options =>
     options.UseSqlite("Data Source=bookings.db"));
 
+builder.Services
+    .AddAuthentication()
+    .AddJwtBearer("Bearer", options =>
+    {
+        options.Authority = "https://localhost:5001";
+        options.TokenValidationParameters = new TokenValidationParameters()
+        {
+            ValidateAudience = false
+        };
+    });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("scope1", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireClaim("scope1", "scope1");
+    });
+});
+
+
 builder.Services.AddScoped<IRoomService, DummyRoomService>();
 builder.Services.AddScoped<BookingManager>();
 
@@ -64,5 +85,6 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
-
+app.UseAuthentication();
+app.UseAuthorization();
 app.Run();
