@@ -1,3 +1,5 @@
+using Microsoft.IdentityModel.Tokens;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +9,26 @@ builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
+builder.Services
+    .AddAuthentication()
+    .AddJwtBearer("Bearer", options =>
+    {
+        options.Authority = "https://localhost:5001";
+        options.TokenValidationParameters = new TokenValidationParameters()
+        {
+            ValidateAudience = false
+        };
+    });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("scope1", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireClaim("scope1", "scope1");
+    });
+});
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -14,5 +36,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 app.Run();

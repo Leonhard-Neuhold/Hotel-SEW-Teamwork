@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "dgSpecHash": "8HIDDF3C4/A=",
+  "success": true,
+  "projectFilePath": "C:\\Schule\\SEW\\Hotel-SEW-Teamwork\\HotelProject\\Frontend\\Frontend.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Roman\\.nuget\\packages\\duende.identitymodel\\7.0.0\\duende.identitymodel.7.0.0.nupkg.sha512",
+    "C:\\Users\\Roman\\.nuget\\packages\\duende.identitymodel.oidcclient\\6.0.1\\duende.identitymodel.oidcclient.6.0.1.nupkg.sha512",
+    "C:\\Users\\Roman\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\9.0.5\\microsoft.aspnetcore.authentication.jwtbearer.9.0.5.nupkg.sha512",
+    "C:\\Users\\Roman\\.nuget\\packages\\microsoft.aspnetcore.authentication.openidconnect\\9.0.5\\microsoft.aspnetcore.authentication.openidconnect.9.0.5.nupkg.sha512",
+    "C:\\Users\\Roman\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.0\\microsoft.extensions.dependencyinjection.abstractions.9.0.0.nupkg.sha512",
+    "C:\\Users\\Roman\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\9.0.0\\microsoft.extensions.logging.abstractions.9.0.0.nupkg.sha512",
+    "C:\\Users\\Roman\\.nuget\\packages\\microsoft.identitymodel.abstractions\\8.0.1\\microsoft.identitymodel.abstractions.8.0.1.nupkg.sha512",
+    "C:\\Users\\Roman\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\8.0.1\\microsoft.identitymodel.jsonwebtokens.8.0.1.nupkg.sha512",
+    "C:\\Users\\Roman\\.nuget\\packages\\microsoft.identitymodel.logging\\8.0.1\\microsoft.identitymodel.logging.8.0.1.nupkg.sha512",
+    "C:\\Users\\Roman\\.nuget\\packages\\microsoft.identitymodel.protocols\\8.0.1\\microsoft.identitymodel.protocols.8.0.1.nupkg.sha512",
+    "C:\\Users\\Roman\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\8.0.1\\microsoft.identitymodel.protocols.openidconnect.8.0.1.nupkg.sha512",
+    "C:\\Users\\Roman\\.nuget\\packages\\microsoft.identitymodel.tokens\\8.0.1\\microsoft.identitymodel.tokens.8.0.1.nupkg.sha512",
+    "C:\\Users\\Roman\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.0.1\\system.identitymodel.tokens.jwt.8.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
