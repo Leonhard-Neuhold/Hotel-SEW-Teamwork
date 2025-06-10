@@ -1,15 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using RoomService.Model;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using RoomService.Services;
 
 namespace RoomService.Controller;
 
 [ApiController]
 [Route("api/[controller]")]
-public class RoomController
+public class RoomController(RoomManager roomManager) : ControllerBase
 {
     [HttpGet("GetAvailableRooms")]
-    public IActionResult GetAvailableRooms()
+    [Authorize]
+    public async Task<IActionResult> GetAvailableRooms([FromQuery] DateTime date)
     {
-        throw new NotImplementedException("Wird no gmocht!!");
+        var rooms = await roomManager.GetAvailableRoomsAsync(date);
+        return Ok(rooms);
     }
 }

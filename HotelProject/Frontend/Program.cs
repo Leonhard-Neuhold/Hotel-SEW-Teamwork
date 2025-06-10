@@ -2,12 +2,17 @@ using Frontend.Components;
 using Frontend.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Components.Server;
+using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddMudServices();
 
 builder.Services
     .AddAuthentication(options =>
@@ -40,14 +45,44 @@ builder.Services
         options.GetClaimsFromUserInfoEndpoint = true;
     });
 
+// HttpClients
 builder.Services
     .AddHttpClient("ApiClient", client =>
     {
         client.BaseAddress = new Uri("https://localhost:7016");
     });
+builder.Services
+    .AddHttpClient("RestaurantClient", client =>
+    {
+        client.BaseAddress = new Uri("https://localhost:7243");
+    });
+builder.Services
+    .AddHttpClient("BookingClient", client =>
+    {
+        client.BaseAddress = new Uri("https://localhost:7187");
+    });
+builder.Services
+    .AddHttpClient("RoomClient", client =>
+    {
+        client.BaseAddress = new Uri("https://localhost:7126");
+    });
+builder.Services
+    .AddHttpClient("FeedbackClient", client =>
+    {
+        client.BaseAddress = new Uri("https://localhost:7156");
+    });
+builder.Services
+    .AddHttpClient("PayClient", client =>
+    {
+        client.BaseAddress = new Uri("http://localhost:5292");
+    });
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ApiService>();
+
+builder.Services.AddAuthorizationCore();
+builder.Services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
+builder.Services.AddCascadingAuthenticationState();
 
 var app = builder.Build();
 

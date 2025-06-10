@@ -1,0 +1,137 @@
+@page "/room"
+@using System.Net.Http.Headers
+@using Microsoft.AspNetCore.Authentication
+
+@layout AppLayout
+
+@attribute [Authorize]
+
+@inject IHttpClientFactory HttpClientFactory
+@inject AuthenticationStateProvider AuthProvider
+@inject IHttpContextAccessor HttpContextAccessor
+
+<PageTitle>Book a Room</PageTitle>
+
+<MudPaper Class="pa-6 mx-auto mt-4" Elevation="4" MaxWidth="800px">
+    <MudText Typo="Typo.h4" GutterBottom>Room Booking</MudText>
+
+    <MudDatePicker Label="Select a Date" @bind-Date="_selectedDate" DateFormat="yyyy-MM-dd" DisableToolbar />
+
+    <MudButton Class="mt-4" Variant="Variant.Filled" Color="Color.Primary" OnClick="LoadAvailableRooms">
+        Load Available Rooms
+    </MudButton>
+
+    @if (_loading)
+    {
+        <MudProgressCircular Indeterminate Color="Color.Primary" Class="mt-4" />
+    }
+
+    @if (_rooms?.Count > 0)
+    {
+        <MudTable Items="_rooms" Hover="true" Class="mt-4">
+            <HeaderContent>
+                <MudTh>Name</MudTh>
+                <MudTh>Description</MudTh>
+                <MudTh>Price</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd>@context.number</MudTd>
+                <MudTd>@context.description</MudTd>
+                <MudTd>@context.price</MudTd>
+                <MudTd>
+                    <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="@(() => BookRoom(context.roomId))">
+                        Book
+                    </MudButton>
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    }
+    else if (!_loading && _rooms != null)
+    {
+        <MudText Color="Color.Secondary" Class="mt-4">No available rooms on this date.</MudText>
+    }
+
+    <MudSnackbarProvider />
+</MudPaper>
+
+@code {
+    private DateTime? _selectedDate = DateTime.Today;
+    private List<RoomDto>? _rooms;
+    private bool _loading = false;
+
+    private async Task LoadAvailableRooms()
+    {
+        _loading = true;
+        try
+        {
+            var accessToken = await HttpContextAccessor.HttpContext!.GetTokenAsync("access_token");
+            var client = HttpClientFactory.CreateClient("RoomClient");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            var response = await client.GetAsync($"/api/room/GetAvailableRooms?date={_selectedDate:yyyy-MM-dd}");
+            response.EnsureSuccessStatusCode();
+
+            _rooms = await response.Content.ReadFromJsonAsync<List<RoomDto>>();
+            await InvokeAsync(StateHasChanged);
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Error loading rooms: {ex.Message}");
+            _rooms = new();
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+
+    private async Task BookRoom(int roomId)
+    {
+        var authState = await AuthProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (!user.Identity?.IsAuthenticated ?? true)
+        {
+            Snackbar.Add("You must be logged in to book a room.", Severity.Error);
+            return;
+        }
+
+        var guestId = user.FindFirst("sub")?.Value ?? user.Identity?.Name;
+        if (string.IsNullOrWhiteSpace(guestId))
+        {
+            Snackbar.Add("Unable to determine user ID.", Severity.Error);
+            return;
+        }
+
+        var booking = new BookingDto(guestId, roomId);
+
+        try
+        {
+            var accessToken = await HttpContextAccessor.HttpContext!.GetTokenAsync("access_token");
+            var client = HttpClientFactory.CreateClient("BookingClient");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            var response = await client.PostAsJsonAsync("/api/booking/MakeReservation", booking);
+
+            if (response.IsSuccessStatusCode)
+            {
+                Snackbar.Add("Room booked successfully!", Severity.Success);
+                await LoadAvailableRooms();
+            }
+            else
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                Snackbar.Add($"Booking failed: {error}", Severity.Error);
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error booking room: {ex.Message}", Severity.Error);
+        }
+    }
+
+    [Inject] ISnackbar Snackbar { get; set; } = default!;
+    
+    public record BookingDto(string guestId, int roomId);
+    
+    public record RoomDto(int roomId, string number, double price, string description);
+}

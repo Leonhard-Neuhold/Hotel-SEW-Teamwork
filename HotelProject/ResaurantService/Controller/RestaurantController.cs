@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ResaurantService.Controller;
@@ -6,9 +7,10 @@ namespace ResaurantService.Controller;
 public class RestaurantController : ControllerBase
 {
     [HttpPost("OrderFood")]
-    public async Task<IActionResult> OrderRoomService(int guestId, string meal)
+    [Authorize(AuthenticationSchemes = "Bearer")]
+    public async Task<IActionResult> OrderRoomService([FromBody] OrderDto order)
     {
-        Console.WriteLine($"Gast {guestId} bekommt {meal}");
+        Console.WriteLine($"Gast {order.guest} bekommt {order.meal}");
         await Task.Delay(1000);
         return Ok();
     }

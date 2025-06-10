@@ -1,12 +1,13 @@
 using BookingService.Config;
 using BookingService.Interfaces;
 using BookingService.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookingService.Services;
 
 public class BookingManager(BookingContext context, IRoomService roomService)
 {
-    public async Task<Booking?> MakeReservationAsync(int guestId, int roomId, DateTime date)
+    public async Task<Booking?> MakeReservationAsync(string guestId, int roomId, DateTime date)
     {
         if (!roomService.IsRoomAvailable(roomId, date))
             return null;
@@ -38,4 +39,12 @@ public class BookingManager(BookingContext context, IRoomService roomService)
             await context.SaveChangesAsync();
         }
     }
+    
+    public async Task<List<Booking>> GetBookingsByDateAsync(DateTime date)
+    {
+        return await context.Bookings
+            .Where(b => b.BookingDate.Date == date.Date)
+            .ToListAsync();
+    }
+
 }

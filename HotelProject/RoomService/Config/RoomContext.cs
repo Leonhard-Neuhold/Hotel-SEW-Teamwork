@@ -3,14 +3,7 @@ using RoomService.Model;
 
 namespace RoomService.Context;
 
-public class RoomContext : DbContext
-
+public class RoomContext(DbContextOptions<RoomContext> options) : DbContext(options)
 {
-    public RoomContext(DbContextOptions<RoomContext> options) : base(options) { }
-    DbSet<Room> Rooms { get; set; }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        
-    }
+    public DbSet<Room> Rooms { get; set; }
 }

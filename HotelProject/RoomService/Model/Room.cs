@@ -3,15 +3,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RoomService.Model;
 
-[Table("ROOMS")]
 public class Room 
 {
-    [Column("ROOM_ID")]
-    [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [Key]
     public int RoomId { get; set; }
     
-    [Column("NAME")]
-    [StringLength(3)]
     [Required]
     public string? RoomNumber { get; set; }
+    
+    [Required] 
+    public double Price { get; set; }
+
+    public string? Description { get; set; }
 }

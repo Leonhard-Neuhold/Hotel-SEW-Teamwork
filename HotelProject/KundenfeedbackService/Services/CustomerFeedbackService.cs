@@ -6,7 +6,7 @@ namespace KundenFeedbackService.Services
 {
     public class CustomerFeedbackService(FeedbackContext context)
     {
-        public async Task<CustomerFeedback> SubmitComplaintAsync(int guestId, string complaint)
+        public async Task<CustomerFeedback> SubmitComplaintAsync(string guestId, string complaint)
         {
             var feedback = new CustomerFeedback
             {

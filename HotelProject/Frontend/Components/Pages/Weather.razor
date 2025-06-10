@@ -1,7 +1,10 @@
 ﻿@page "/weather"
 @using Frontend.Services
 
+@layout AppLayout
+
 @attribute [StreamRendering]
+@attribute [Authorize]
 
 @inject ApiService ApiService
 

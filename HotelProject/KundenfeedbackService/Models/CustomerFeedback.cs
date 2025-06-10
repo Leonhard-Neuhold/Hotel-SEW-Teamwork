@@ -8,7 +8,7 @@ public class CustomerFeedback
     public int FeedbackId { get; set; }
 
     [Required]
-    public int GuestId { get; set; }
+    public string? GuestId { get; set; }
 
     [Required]
     public string Complaint { get; set; } = string.Empty;
