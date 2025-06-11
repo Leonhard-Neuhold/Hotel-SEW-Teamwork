@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RoomService.Services;
 
@@ -16,3 +17,5 @@ public class RoomController(RoomManager roomManager) : ControllerBase
         return Ok(rooms);
     }
 }
+
+public record RoomDto(int roomId, string number, double price, string description);

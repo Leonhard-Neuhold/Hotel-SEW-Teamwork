@@ -1,6 +1,15 @@
 ﻿@page "/feedback"
-@using System.Net.Http.Json
-@inject HttpClient Http
+
+@layout AppLayout
+
+@using System.Net.Http.Headers
+@using Microsoft.AspNetCore.Authentication
+
+@inject IHttpClientFactory HttpClientFactory
+@inject IHttpContextAccessor HttpContextAccessor
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+@attribute [Authorize]
 
 <h3>Customer Feedback</h3>
 
@@ -82,7 +91,10 @@
         submitMessage = null;
         try
         {
-            var response = await Http.PostAsJsonAsync("api/CustomerService/SubmitComplaint", newFeedback);
+            var accessToken = await HttpContextAccessor.HttpContext!.GetTokenAsync("access_token");
+            var client = HttpClientFactory.CreateClient("FeedbackClient");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            var response = await client.PostAsJsonAsync("api/CustomerService/SubmitComplaint", newFeedback);
             if (response.IsSuccessStatusCode)
             {
                 submitMessage = "Complaint submitted successfully.";
@@ -105,7 +117,10 @@
     {
         try
         {
-            feedbacks = await Http.GetFromJsonAsync<List<CustomerFeedback>>("api/CustomerService/AllFeedbacks");
+            var accessToken = await HttpContextAccessor.HttpContext!.GetTokenAsync("access_token");
+            var client = HttpClientFactory.CreateClient("FeedbackClient");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            feedbacks = await client.GetFromJsonAsync<List<CustomerFeedback>>("api/CustomerService/AllFeedbacks");
         }
         catch
         {

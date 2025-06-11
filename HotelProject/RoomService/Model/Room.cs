@@ -5,14 +5,15 @@ namespace RoomService.Model;
 
 public class Room 
 {
-    [Key]
+    [Key, Column("RoomId")]
     public int RoomId { get; set; }
     
-    [Required]
+    [Required, Column("RoomNumber")]
     public string? RoomNumber { get; set; }
     
-    [Required] 
+    [Required, Column("Price")] 
     public double Price { get; set; }
-
+    
+    [Required, Column("Description")]
     public string? Description { get; set; }
 }

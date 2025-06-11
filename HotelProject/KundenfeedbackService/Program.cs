@@ -14,27 +14,6 @@ builder.Services.AddDbContext<FeedbackContext>(options =>
 
 builder.Services.AddScoped<CustomerFeedbackService>();
 
-
-builder.Services
-    .AddAuthentication()
-    .AddJwtBearer("Bearer", options =>
-    {
-        options.Authority = "https://localhost:5001";
-        options.TokenValidationParameters = new TokenValidationParameters()
-        {
-            ValidateAudience = false
-        };
-    });
-
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("scope1", policy =>
-    {
-        policy.RequireAuthenticatedUser();
-        policy.RequireClaim("scope1", "scope1");
-    });
-});
-
 builder.Services.AddControllers();
 
 builder.Services

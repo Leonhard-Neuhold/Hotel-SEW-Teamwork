@@ -14,7 +14,7 @@ public class RoomManager(RoomContext context, IBookingClient bookingClient)
     
     public async Task<List<Room>> GetAvailableRoomsAsync(DateTime date)
     {
-        var allRooms = await context.Rooms.ToListAsync();
+        var allRooms = await context.Rooms.Select(r => r).ToListAsync();
         var bookedRoomIds = await bookingClient.GetBookedRoomIdsAsync(date);
 
         var availableRooms = allRooms
