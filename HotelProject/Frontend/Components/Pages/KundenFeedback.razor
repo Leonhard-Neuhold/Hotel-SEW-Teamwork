@@ -1,0 +1,131 @@
+﻿@page "/feedback"
+@using System.Net.Http.Json
+@inject HttpClient Http
+@inject InteractiveAutoRenderMode
+@attribute[StreamRendering]
+
+<h3>Customer Feedback</h3>
+
+<div class="card p-4 mb-4 shadow-sm rounded-2xl">
+    <h4>Submit a Complaint</h4>
+    <EditForm Model="newFeedback" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="mb-3">
+            <label for="guestId" class="form-label">Guest ID</label>
+            <InputText id="guestId" class="form-control" @bind-Value="newFeedback.GuestId" />
+            <ValidationMessage For="() => newFeedback.GuestId" />
+        </div>
+
+        <div class="mb-3">
+            <label for="complaint" class="form-label">Complaint</label>
+            <InputTextArea id="complaint" class="form-control" @bind-Value="newFeedback.Complaint" rows="3" />
+            <ValidationMessage For="() => newFeedback.Complaint" />
+        </div>
+
+        <Button type="submit" class="btn btn-primary">Submit</Button>
+    </EditForm>
+
+    @if (!string.IsNullOrEmpty(submitMessage))
+    {
+        <div class="alert alert-info mt-3">@submitMessage</div>
+    }
+</div>
+
+<div class="card p-4 shadow-sm rounded-2xl">
+    <h4>All Feedbacks</h4>
+    @if (feedbacks is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else if (!feedbacks.Any())
+    {
+        <p>No feedbacks yet.</p>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Feedback ID</th>
+                    <th>Guest ID</th>
+                    <th>Complaint</th>
+                    <th>Submitted At</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var fb in feedbacks)
+                {
+                    <tr>
+                        <td>@fb.FeedbackId</td>
+                        <td>@fb.GuestId</td>
+                        <td>@fb.Complaint</td>
+                        <td>@fb.SubmittedAt.ToLocalTime().ToString("g")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+@code {
+    private FeedbackDto newFeedback = new();
+    private string? submitMessage;
+    private List<CustomerFeedback>? feedbacks;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadFeedbacks();
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        submitMessage = null;
+        try
+        {
+            var response = await Http.PostAsJsonAsync("api/CustomerService/SubmitComplaint", newFeedback);
+            if (response.IsSuccessStatusCode)
+            {
+                submitMessage = "Complaint submitted successfully.";
+                newFeedback = new();
+                await LoadFeedbacks();
+            }
+            else
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                submitMessage = $"Error: {error}";
+            }
+        }
+        catch (Exception ex)
+        {
+            submitMessage = $"Submission failed: {ex.Message}";
+        }
+    }
+
+    private async Task LoadFeedbacks()
+    {
+        try
+        {
+            feedbacks = await Http.GetFromJsonAsync<List<CustomerFeedback>>("api/CustomerService/AllFeedbacks");
+        }
+        catch
+        {
+            feedbacks = new List<CustomerFeedback>();
+        }
+    }
+
+    public class FeedbackDto
+    {
+        public string GuestId { get; set; } = string.Empty;
+        public string Complaint { get; set; } = string.Empty;
+    }
+
+    public class CustomerFeedback
+    {
+        public int FeedbackId { get; set; }
+        public string? GuestId { get; set; }
+        public string Complaint { get; set; } = string.Empty;
+        public DateTime SubmittedAt { get; set; }
+    }
+}
